@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Tracking</title>
+</head>
+
+<style>
+table, th, td {
+    border:1px solid black;
+}
+</style>
+
+<body>
+<h1>Inventory Tracking</h1>
+
+{% for message in messages %}
+<h5>{{message}}</h5>
+{% endfor %}
+
+<!-- List all current items in the model (database) -->
+
+<table style="width:100%">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Date last stocked</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.created_on}}</td>
+        <td>
+            <form method="GET" action="delete">
+                <input type="hidden" value="{{item.id}}" name="item_id" />
+                <button type="Submit">Delete</button>
+            </form>
+        </td>
+        <td>
+            <form action="/edit/{{item.id}}">
+                <button type="Submit">Edit</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h4> <a href="create"> Add Item </h4>
+
+<h4> <a href="export_csv"> Create CSV </h4>
+
+</body>
+</html>

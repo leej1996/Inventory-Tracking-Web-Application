@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+table, th, td {
+    border:1px solid black;
+}
+</style>
+
+<body>
+{% for message in messages %}
+<h5>{{message}}</h5>
+{% endfor %}
+
+<!-- Page for user to choose which fields to edit and input data -->
+<form method="GET" action="/edit_item">
+<input type="hidden" value="{{item.id}}" name="item_id" />
+<table style="width:100%">
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Submit</th>
+    </tr>
+    <tr>
+        <td><input type="text" value={{item.name}} name="name" /></td>
+        <td><input type="text" value={{item.type}} name="type" /></td>
+        <td><input type="number" value="{{item.quantity}}" name="quantity" /></td>
+        <td><input type="number" value="{{item.price}}" name="price" step="0.01" /></td>
+        <td>
+            <button type="Submit">Submit</button>
+        </td>
+    </tr>
+</table>
+</form>
+</body>
+</html>
